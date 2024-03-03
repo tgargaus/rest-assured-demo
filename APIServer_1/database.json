@@ -1,0 +1,29 @@
+{
+   "posts":[
+      {
+         "id":1,
+         "title":"Title 1",
+         "author":"user1"
+      },
+      {
+         "id":2,
+         "title":"Title 2",
+         "author":"user2"
+      }
+   ],
+   "comments":[
+      {
+         "id":1,
+         "body":"comment 1",
+         "postId":1
+      },
+      {
+         "id":1,
+         "body":"comment 2 ",
+         "postId":2
+      }
+   ],
+   "profile":{
+      "name":"tarun"
+   }
+}

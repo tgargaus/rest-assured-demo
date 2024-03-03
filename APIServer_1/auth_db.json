@@ -1,0 +1,28 @@
+{
+   "secretKey":"123456789",
+   "expiresIn":"1h",
+   "users":[
+      {
+         "id":1,
+         "name":"vasanth",
+         "email":"vasanth@gmail.com",
+         "password":"vasanth"
+      },
+      {
+         "id":2,
+         "name":"foo",
+         "email":"foo@email.com",
+         "password":"foo"
+      },
+      {
+         "id":3,
+         "name":"bar",
+         "email":"bar@email.com",
+         "password":"bar"
+      }
+   ],
+   "authenticationURL":"/auth/login",
+   "authenticatedURL":[
+      "/comments"
+   ]
+}

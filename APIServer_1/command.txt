@@ -1,0 +1,71 @@
+
+
+- How to run api server :
+  - npm run start
+
+  - npm run start_with_auth  => This method uses authentication for "comments" resource
+
+
+- API Resources
+  - http://localhost:3000/posts
+  - http://localhost:3000/comments
+  - http://localhost:3000/profile
+
+- Home
+  - http://localhost:3000
+
+- Test API Server using curl cli command
+
+
+  - Fetch all posts
+    - curl -X GET http://localhost:3000/posts
+
+  - Fetch specific post with id 1
+    - curl -X GET http://localhost:3000/posts/1
+
+  - Fetch post with invalid id
+    - curl -X GET http://localhost:3000/posts/3 -v
+    - '-v' produces output in verbose
+    - Return {} with 404 error
+
+  - Fetch profile resource
+    - curl -X GET http://localhost:3000/profile
+
+  - Fetch comments resource
+    - curl -X GET http://localhost:3000/comments
+    - This command will fail, if server is started with authentication
+
+
+  - Login to Server, This is required only when server is started in authentication mode
+
+    - Login without providing user/password - this returns 401 with error
+    - curl -X POST  http://localhost:3000/auth/login
+
+
+    - Login with valid user/password
+    - curl -X POST http://localhost:3000/auth/login --header "Content-Type: application/json"  -d '{"email": "vasanth@gmail.com", "password": "vasanth"}'
+
+    - This returns access token like this :
+
+      ```
+      {
+        "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InZhc2FudGhAZ21haWwuY29tIiwicGFzc3dvcmQiOiJ2YXNhbnRoIiwiaWF0IjoxNzA5NDU2MDgwLCJleHAiOjE3MDk0NTk2ODB9.3Uw0h6czdRJFcIYXDtl7cwMAY4gi4IlKaXjc1rMp3BY"
+      }
+      ```
+
+    - Fetch "comments" resource using access token
+
+    - curl -X GET http://localhost:3000/comments --header "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InZhc2FudGhAZ21haWwuY29tIiwicGFzc3dvcmQiOiJ2YXNhbnRoIiwiaWF0IjoxNzA5NDU2MDgwLCJleHAiOjE3MDk0NTk2ODB9.3Uw0h6czdRJFcIYXDtl7cwMAY4gi4IlKaXjc1rMp3BY"
+
+    - This returns list of comments
+
+    - Fetch "comments" with id 1
+
+    - curl -X GET http://localhost:3000/comments/1 --header "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InZhc2FudGhAZ21haWwuY29tIiwicGFzc3dvcmQiOiJ2YXNhbnRoIiwiaWF0IjoxNzA5NDU2MDgwLCJleHAiOjE3MDk0NTk2ODB9.3Uw0h6czdRJFcIYXDtl7cwMAY4gi4IlKaXjc1rMp3BY"
+
+
+    - You can have login details in request.json file and run the curl command like this
+    - curl -X POST http://localhost:3000/auth/login --header "Content-Type: application/json"  -d @request.json
+    - request.json is given in project directory
+
+  Note: Access token is valid for 1 hours. This login or token generation is not required, if server is started without authentication.
